@@ -1,7 +1,13 @@
 <div x-data="{ modelOpen: false }">
-    <button @click="modelOpen =!modelOpen" class="button-primary" type="button">
-        View Scholarship
-    </button>
+    @if ($applicant->status != 'Pending')
+        <button class="button-disabled" type="button" disabled>
+            Ver detalles
+        </button>
+    @else
+        <button @click="modelOpen = !modelOpen" class="button-primary" type="button">
+            Ver detalles
+        </button>
+    @endif
     <div x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
         aria-modal="true">
         <div class="flex items-end justify-center min-h-screen px-4 text-center md:items-center sm:block sm:p-0">
@@ -51,7 +57,7 @@
                 </div>
 
                 <div class="w-full p-4">
-                    <h3 class="font-semibold mb-2">Adjuntar explicaciones</h3>
+                    <h3 class="font-semibold mb-2">Adjuntar explicaciones (opcional)</h3>
                     <textarea class="w-full" name="" id="" cols="30" rows="10"></textarea>
                 </div>
 
@@ -59,13 +65,11 @@
                 <div class="flex items-center p-4 border-t border-gray-200 rounded-b md:p-5 dark:border-gray-600">
                     @can('edit scholarship')
                         <button data-modal-hide="modal-{{ $applicant->id }}" type="button"
-                            wire:click="$parent.$parent.deletescholarship({{ $applicant->id }})"
-                            wire:confirm="Are you sure you want to delete this scholarship?"
-                            class="ml-2 button-danger">Acept</button>
+                            wire:click="aceptapplicant"
+                            class="ml-2 button-primary">Aprobar</button>
                         <button data-modal-hide="modal-{{ $applicant->id }}" type="button"
-                            wire:click="$parent.$parent.deletescholarship({{ $applicant->id }})"
-                            wire:confirm="Are you sure you want to delete this scholarship?"
-                            class="ml-2 button-danger">Delete</button>
+                            wire:click="rejectapplicant"
+                            class="ml-2 button-danger">Denegar</button>
                     @endcan
                     @can('take attendance')
                         <a data-modal-hide="modal-{{ $scholarship->id }}"

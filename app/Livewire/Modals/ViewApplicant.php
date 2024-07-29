@@ -19,4 +19,19 @@ class ViewApplicant extends Component
             'applicant' => $this->applicant
         ]);
     }
+
+    public function aceptapplicant()
+    {
+        $this->applicant->update([
+            'status' => 'accepted'
+        ]);
+        $this->dispatch('user-updated', ['message' => 'user updated successfully!']);
+    }
+
+    public function rejectapplicant()
+    {
+        $this->applicant->update([
+            'status' => 'rejected'
+        ]);
+    }
 }
