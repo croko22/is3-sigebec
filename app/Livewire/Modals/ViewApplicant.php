@@ -1,12 +1,10 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\Modals;
 
-use Livewire\Attributes\On;
 use Livewire\Component;
 
-#[On('user-updated')]
-class applicantRow extends Component
+class ViewApplicant extends Component
 {
     public $applicant;
 
@@ -14,10 +12,10 @@ class applicantRow extends Component
     {
         $this->applicant = $applicant;
     }
+
     public function render()
     {
-        
-        return view('livewire.applicant-row', [
+        return view('livewire.modals.view-applicant' , [
             'applicant' => $this->applicant
         ]);
     }

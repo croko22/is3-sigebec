@@ -16,14 +16,14 @@
                     alt="Image Description">
                 <div class="grow">
                     <span
-                        class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $applicant->name }}</span>
+                        class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $applicant->user->name }}</span>
                 </div>
             </div>
         </div>
     </td>
     <td class="h-px w-72 whitespace-nowrap">
         <div class="px-6 py-3">
-            <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $applicant->email }}</span>
+            <span class="block text-sm font-semibold text-gray-800 dark:text-neutral-200">{{ $applicant->user->email }}</span>
         </div>
     </td>
     <td class="size-px whitespace-nowrap">
@@ -35,7 +35,7 @@
                     <path
                         d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
                 </svg>
-                Active
+                {{ $applicant->status }}
             </span>
         </div>
     </td>
@@ -43,7 +43,7 @@
         <div class="px-6 py-3">
             <div class="flex items-center gap-x-3">
                 <span class="text-xs text-gray-500 dark:text-neutral-500">
-                    {{-- {{ $applicant->scholarships->count() }} scholarships --}}7
+                    {{  $applicant->scholarshipCall->name }}
                 </span>
             </div>
         </div>
@@ -58,7 +58,7 @@
 
     <td class="size-px whitespace-nowrap">
         <div class="px-6 py-1.5">
-            <livewire:modals.edit-applicant :user="$applicant" />
+            <livewire:modals.view-applicant :applicant="$applicant" />
         </div>
     </td>
 </tr>

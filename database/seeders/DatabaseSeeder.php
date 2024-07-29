@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Applicant;
 use App\Models\User;
 use App\Models\Scholarship;
+use App\Models\ScholarshipCall;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -31,5 +33,19 @@ class DatabaseSeeder extends Seeder
                 ['name' => 'Scholarship 3', 'description' => 'Description 3'],
             ]
         );
+
+        $scholarships = Scholarship::all();
+
+        $scholarships->each(function ($scholarship) {
+            ScholarshipCall::create([
+                'name' => $scholarship->name . ' Call',
+                'description' => 'Description for ' . $scholarship->name . ' Call',
+                'start_date' => now(),
+                'end_date' => now()->addMonth(),
+                'scholarship_id' => $scholarship->id,
+            ]);
+        });
+        
+        $this->call(ApplicantSeeder::class);
     }
 }
