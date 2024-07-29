@@ -67,7 +67,7 @@
                         <a data-modal-hide="modal-{{ $scholarship->id }}"
                             href="{{ route('scholarship.show', $scholarship) }}" class="button-primary">Edit</a>
                         <button data-modal-hide="modal-{{ $scholarship->id }}" type="button"
-                            wire:click="$parent.$parent.deletescholarship({{ $scholarship->id }})"
+                            wire:click="$parent.$parent.deleteScholarship({{ $scholarship->id }})"
                             wire:confirm="Are you sure you want to delete this scholarship?"
                             class="ml-2 button-danger">Delete</button>
                     @endcan

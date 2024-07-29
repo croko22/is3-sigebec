@@ -9,7 +9,7 @@ class ScholarshipCall extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['start_date', 'end_date', 'course_id'];
+    protected $fillable = ['start_date', 'end_date', 'scholarship_id'];
 
     public function scholarship()
     {
