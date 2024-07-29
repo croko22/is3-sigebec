@@ -37,12 +37,15 @@
                     <div class="flex items-center justify-between">
                         <div>
                             <h2 class="text-sm text-gray-500 dark:text-neutral-500">
+                                @role('admin')
                                 Postulantes
+                                @else
+                                Futuras Convocatorias
+                                @endrole
                             </h2>
                         </div>
                     </div>
                     <!-- End Header -->
-
                     <div>
                         <ul class="divide-y divide-gray-200 dark:divide-neutral-600">
                             @haspermission('edit scholarship')
@@ -67,6 +70,35 @@
                                             <div>
                                                 <h3 class="text-sm font-medium text-gray-800 dark:text-neutral-200">
                                                     No applicants
+                                                </h3>
+                                            </div>
+                                        </div>
+                                @endforelse
+                            @else
+                                @forelse ($scholarshipsFutures as $future)
+                                    <li class="flex justify-between py-3 items center">
+                                        <div class="flex gap-3 items center">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="w-8 h-8 bi bi-journal-bookmark" viewBox="0 0 16 16">
+                                              <path fill-rule="evenodd" d="M6 8V1h1v6.117L8.743 6.07a.5.5 0 0 1 .514 0L11 7.117V1h1v7a.5.5 0 0 1-.757.429L9 7.083 6.757 8.43A.5.5 0 0 1 6 8"/>
+                                              <path d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2"/>
+                                              <path d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1z"/>
+                                            </svg>
+                                            <div>
+                                                <h3 class="text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                    {{ $future->name }}
+                                                </h3>
+                                                <p class="text-xs text-gray-500 dark:text-neutral-500">
+                                                    Fecha de inscripción: <b>{{ $future->start_date->format('d M, Y') }}</b>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @empty
+                                    <li class="flex justify-between py-3 items center">
+                                        <div class="flex gap-3 items center">
+                                            <div>
+                                                <h3 class="text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                    No hay futuras convocatorias
                                                 </h3>
                                             </div>
                                         </div>
