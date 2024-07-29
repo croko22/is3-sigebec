@@ -32,18 +32,23 @@ class DatabaseSeeder extends Seeder
                 ['name' => 'Scholarship 2', 'description' => 'Description 2'],
                 ['name' => 'Scholarship 3', 'description' => 'Description 3'],
             ]
-        );
-
-        $scholarships = Scholarship::all();
-
-        $scholarships->each(function ($scholarship) {
-            ScholarshipCall::create([
+        )->each(function ($scholarship) {
+            ScholarshipCall::factory()->createMany([
+                [
                 'name' => $scholarship->name . ' Call',
                 'description' => 'Description for ' . $scholarship->name . ' Call',
-                'start_date' => now(),
-                'end_date' => now()->addMonth(),
+                'start_date' => now()->subDays(10),
+                'end_date' => now()->addDays(10),
                 'scholarship_id' => $scholarship->id,
-            ]);
+                ],
+                [
+                'name' => $scholarship->name . ' Call',
+                'description' => 'Description for ' . $scholarship->name . ' Call',
+                'start_date' => now()->addMonth(),
+                'end_date' => now()->addMonths(2),
+                'scholarship_id' => $scholarship->id,
+                ]
+        ]);
         });
         
         $this->call(ApplicantSeeder::class);

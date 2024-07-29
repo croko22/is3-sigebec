@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Scholarship;
+use App\Models\ScholarshipCall;
+use Carbon\Carbon;
 
 class DashboardController extends Controller
 {
@@ -12,17 +14,22 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        if (auth()->user()->hasRole('admin')) {
-            $scholarships = Scholarship::orderBy('updated_at', 'desc')->take(10)->get();
-        } else {
-            // $scholarships = auth()->user()->scholarship;
-            $scholarships = [];
-        }
-
-        $applicants = User::role('applicant')->take(6)->get();
         $applicantsCount = User::role('applicant')->count();
         $scholarshipsCount = Scholarship::count();
+        
+        $allCalls = ScholarshipCall::with(['scholarship'])->where('end_date', '>=', Carbon::now())->get();
+        
+        if (auth()->user()->hasRole('admin')) {
+            $applicants = User::role('applicant')->take(6)->get();
+            $scholarships = $allCalls;
 
-        return view('dashboard', compact('scholarships', 'scholarshipsCount', 'applicantsCount', 'applicants'));
+            return view('dashboard', compact('scholarships', 'scholarshipsCount', 'applicantsCount', 'applicants'));
+        } else {
+            $scholarships = $allCalls->where('start_date', '<=', Carbon::now())->where('end_date', '>=', Carbon::now());
+            $scholarshipsFutures = $allCalls->where('start_date', '>', Carbon::now());
+            
+            return view('dashboard', compact('scholarships','scholarshipsFutures' , 'scholarshipsCount', 'applicantsCount'));
+        }
+
     }
 }
