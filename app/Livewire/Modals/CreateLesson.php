@@ -2,14 +2,14 @@
 
 namespace App\Livewire\Modals;
 
-use App\Models\Course;
+use App\Models\Scholarship;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
 
 class CreateLesson extends Component
 {
-    public $course;
+    public $scholarship;
     #[Validate('required')]
     public $date = null;
     #[Validate('required')]
@@ -23,9 +23,9 @@ class CreateLesson extends Component
         $this->modalOpen = false;
     }
 
-    public function mount(Course $course)
+    public function mount(scholarship $scholarship)
     {
-        $this->course = $course;
+        $this->scholarship = $scholarship;
     }
 
     public function render()
@@ -36,7 +36,7 @@ class CreateLesson extends Component
     // public function createLesson()
     // {
     //     $specificDate = $this->date . ' ' . $this->time;
-    //     $this->course->lessons()->create([
+    //     $this->scholarship->lessons()->create([
     //         'date' => $specificDate,
     //     ]);
 

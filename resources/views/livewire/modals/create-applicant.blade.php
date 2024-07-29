@@ -1,13 +1,14 @@
 <div x-data="{ modalOpen: $wire.entangle('modalOpen') }">
-    <button @click="modalOpen =!modalOpen" class="flex items-center button-primary gap-x-2">
+    <button @click="modalOpen =!modalOpen" class="flex flex-row items-center justify-center gap-2 button-primary">
         <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
             stroke-linejoin="round">
             <path d="M5 12h14" />
             <path d="M12 5v14" />
         </svg>
-        New attendance session
+        Add applicant
     </button>
+
     <div x-show="modalOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
         aria-modal="true">
         <div class="flex items-end justify-center min-h-screen px-4 text-center md:items-center sm:block sm:p-0">
@@ -25,7 +26,7 @@
                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 class="inline-block w-full max-w-xl p-8 my-20 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl 2xl:max-w-2xl">
                 <div class="flex items-center justify-between space-x-4">
-                    <h1 class="text-xl font-medium text-gray-800 ">Create scholarship</h1>
+                    <h1 class="text-xl font-medium text-gray-800 ">Create applicant</h1>
 
                     <button @click="modalOpen = false" class="text-gray-600 focus:outline-none hover:text-gray-700">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
@@ -36,36 +37,37 @@
                     </button>
                 </div>
 
-                <div class="relative w-full max-w-2xl max-h-full p-4">
-                    <div class="p-4 space-y-4 md:p-5">
+                <p class="mt-2 text-sm text-gray-500 ">
+                    Add a new applicant to the class.
+                </p>
 
-                        <!-- Modal body -->
-                        <form class="p-4 md:p-5" wire:submit.prevent="$parent.createLesson">
-                            <div class="grid grid-cols-2 gap-4 mb-4">
-                                <div class="col-span-2 sm:col-span-1">
-                                    <label for="date"
-                                        class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
-                                    <input type="date" id="date" wire:model="$parent.date"
-                                        class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                        required />
-                                    @error('date')
-                                        <p class="text-sm text-red-500 dark:text-red-400">{{ $message }}</p>
-                                    @enderror
-                                </div>
-                            </div>
-                        </form>
+                <form class="mt-5" wire:submit.prevent="$parent.createapplicant">
+                    <div>
+                        <label class="block text-sm text-gray-700 capitalize dark:text-gray-200">applicant name</label>
+                        <input placeholder="Wallace" type="text" wire:model="$parent.name" class="input">
+                        @error('name')
+                            <span class="text-sm text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="mt-4">
+                        <label for="email"
+                            class="block text-sm text-gray-700 capitalize dark:text-gray-200">applicant
+                            email</label>
+                        <input placeholder="example@example.com" type="text" wire:model="$parent.email"
+                            class="input">
+                        @error('$parent.email')
+                            <span class="text-sm text-red-500">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="flex justify-end mt-6">
                         <button type="submit"
-                            class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                            <svg class="w-5 h-5 me-1 -ms-1" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                            Save attendance
+                            class="px-3 py-2 text-sm tracking-wide text-white capitalize transition-colors duration-200 transform bg-indigo-500 rounded-md dark:bg-indigo-600 dark:hover:bg-indigo-700 dark:focus:bg-indigo-700 hover:bg-indigo-600 focus:outline-none focus:bg-indigo-500 focus:ring focus:ring-indigo-300 focus:ring-opacity-50">
+                            Create applicant
                         </button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     </div>

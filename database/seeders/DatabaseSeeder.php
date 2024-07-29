@@ -3,8 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use App\Models\Course;
-use App\Models\Student;
+use App\Models\Scholarship;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,36 +18,17 @@ class DatabaseSeeder extends Seeder
         ]);
         $adminUser->assignRole('admin');
 
-        $teachers = User::factory(10)->create();
-        $teachers->each(function ($teacher) {
-            $teacher->assignRole('teacher');
+        $applicants = User::factory(10)->create();
+        $applicants->each(function ($applicant) {
+            $applicant->assignRole('applicant');
         });
 
-        $students = Student::factory(30)->create();
-        $courses = Course::factory()->createMany(
+        Scholarship::factory()->createMany(
             [
-                ['name' => 'Java', 'description' => 'Java Programming'],
-                ['name' => 'Python', 'description' => 'Python Programming'],
-                ['name' => 'C++', 'description' => 'C++ Programming'],
-                ['name' => 'C#', 'description' => 'C# Programming'],
-                ['name' => 'PHP', 'description' => 'PHP Programming'],
-                ['name' => 'JavaScript', 'description' => 'JavaScript Programming'],
-                ['name' => 'Ruby', 'description' => 'Ruby Programming'],
-                ['name' => 'Swift', 'description' => 'Swift Programming'],
-                ['name' => 'Kotlin', 'description' => 'Kotlin Programming'],
-                ['name' => 'Go', 'description' => 'Go Programming'],
+                ['name' => 'Scholarship 1', 'description' => 'Description 1'],
+                ['name' => 'Scholarship 2', 'description' => 'Description 2'],
+                ['name' => 'Scholarship 3', 'description' => 'Description 3'],
             ]
         );
-
-        $courses->each(function ($course) use ($students) {
-            $randomNumberOfStudents = rand(1, $students->count());
-
-            $course->students()->attach(
-                $students->random($randomNumberOfStudents)->pluck('id')->toArray()
-            );
-            $course->teachers()->attach(
-                User::role('teacher')->get()->random()->id
-            );
-        });
     }
 }

@@ -9,12 +9,12 @@ use Livewire\Component;
 class LessonRow extends Component
 {
     public $lesson;
-    public $course;
+    public $scholarship;
 
-    public function mount($lesson, $course)
+    public function mount($lesson, $scholarship)
     {
         $this->lesson = $lesson;
-        $this->course = $course;
+        $this->scholarship = $scholarship;
     }
     public function render()
     {

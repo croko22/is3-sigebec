@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Permission\Traits\HasRoles;
@@ -47,13 +48,13 @@ class User extends Authenticatable implements CanResetPassword
         ];
     }
 
-    public static function teachers()
+    public static function applicants()
     {
-        return self::role('teacher');
+        return self::role('applicant');
     }
 
-    public function courses()
+    public function scholarship(): HasOne
     {
-        return $this->belongsToMany(Course::class);
+        return $this->hasOne(Scholarship::class);
     }
 }

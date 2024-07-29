@@ -12,13 +12,13 @@
                 </svg>
 
                 <span>
-                    Laraecole
+                    Sigebec
                 </span>
                 @hasrole('admin')
                     <span class="text-blue-500">-admin</span>
                 @endhasrole
-                @hasrole('teacher')
-                    <span class="text-green-500">-teacher</span>
+                @hasrole('applicant')
+                    <span class="text-green-500">-applicant</span>
                 @endhasrole
             </a>
         </div>
@@ -38,19 +38,17 @@
             @hasrole('admin')
                 <div
                     class="flex flex-col mt-5 gap-y-4 gap-x-0 md:flex-row md:justify-center md:items-center md:gap-y-0 md:gap-x-7 md:mt-0">
-                    <a class="nav-link {{ request()->routeIs('course') ? 'active' : '' }}" wire:navigate
-                        href={{ route('course') }} aria-current="page">Courses</a>
-                    <a class="nav-link {{ request()->routeIs('student') ? 'active' : '' }}" wire:navigate
-                        href={{ route('student') }}>Students</a>
-                    <a class="nav-link {{ request()->routeIs('teacher') ? 'active' : '' }}" wire:navigate
-                        href={{ route('teacher') }}>Teachers</a>
+                    <a class="nav-link {{ request()->routeIs('scholarship') ? 'active' : '' }}" wire:navigate
+                        href={{ route('scholarship') }} aria-current="page">Scholarships</a>
+                    <a class="nav-link {{ request()->routeIs('applicant') ? 'active' : '' }}" wire:navigate
+                        href={{ route('applicant') }}>Applicants</a>
                 </div>
             @endhasrole
-            @hasrole('teacher')
+            @hasrole('applicant')
                 <div
                     class="flex flex-col mt-5 gap-y-4 gap-x-0 md:flex-row md:justify-center md:items-center md:gap-y-0 md:gap-x-7 md:mt-0">
-                    <a class="nav-link {{ request()->routeIs('course') ? 'active' : '' }}" wire:navigate
-                        href={{ route('course') }} aria-current="page">Courses</a>
+                    <a class="nav-link {{ request()->routeIs('scholarship') ? 'active' : '' }}" wire:navigate
+                        href={{ route('scholarship') }} aria-current="page">Scholarships</a>
                 </div>
             @endhasrole
         </div>

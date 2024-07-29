@@ -4,9 +4,8 @@
         <div class="p-4 space-y-4 sm:p-6 sm:space-y-6">
             <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 sm:gap-6">
                 <x-dashboard.header-card label="Welcome" :value="auth()->user()->name" />
-                <x-dashboard.header-card label="Total courses" :value="$coursesCount" />
-                <x-dashboard.header-card label="Total students" :value="$studentsCount" />
-                <x-dashboard.header-card label="Total teachers" :value="$teachersCount" />
+                <x-dashboard.header-card label="Total scholarships" :value="$scholarshipsCount" />
+                <x-dashboard.header-card label="Total applicants" :value="$applicantsCount" />
             </div>
 
             <div class="grid gap-4 lg:grid-cols-2 sm:gap-6">
@@ -16,13 +15,13 @@
                     <div class="flex items-center justify-between">
                         <div>
                             <h2 class="text-sm text-gray-500 dark:text-neutral-500">
-                                Courses
+                                Scholarships
                             </h2>
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-4">
-                        @foreach ($courses as $index => $course)
-                            <x-dashboard.course-pill :course="$course" :index="$index" />
+                        @foreach ($scholarships as $index => $scholarship)
+                            <x-dashboard.scholarship-pill :scholarship="$scholarship" :index="$index" />
                         @endforeach
                     </div>
                 </div>
@@ -35,7 +34,7 @@
                     <div class="flex items-center justify-between">
                         <div>
                             <h2 class="text-sm text-gray-500 dark:text-neutral-500">
-                                Teachers
+                                Applicants
                             </h2>
                         </div>
                     </div>
@@ -43,22 +42,33 @@
 
                     <div>
                         <ul class="divide-y divide-gray-200 dark:divide-neutral-600">
-                            @foreach ($teachers as $teacher)
-                                <li class="flex justify-between py-3 items center">
-                                    <div class="flex gap-3 items center">
-                                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
-                                            alt="{{ $teacher->name }}" class="w-8 h-8 rounded-full">
-                                        <div>
-                                            <h3 class="text-sm font-medium text-gray-800 dark:text-neutral-200">
-                                                {{ $teacher->name }}
-                                            </h3>
-                                            <p class="text-xs text-gray-500 dark:text-neutral-500">
-                                                {{ $teacher->email }}
-                                            </p>
+                            @haspermission('edit scholarship')
+                                @forelse ($applicants as $applicant)
+                                    <li class="flex justify-between py-3 items center">
+                                        <div class="flex gap-3 items center">
+                                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png"
+                                                alt="{{ $applicant->name }}" class="w-8 h-8 rounded-full">
+                                            <div>
+                                                <h3 class="text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                    {{ $applicant->name }}
+                                                </h3>
+                                                <p class="text-xs text-gray-500 dark:text-neutral-500">
+                                                    {{ $applicant->email }}
+                                                </p>
+                                            </div>
                                         </div>
-                                    </div>
-                                </li>
-                            @endforeach
+                                    </li>
+                                @empty
+                                    <li class="flex justify-between py-3 items center">
+                                        <div class="flex gap-3 items center">
+                                            <div>
+                                                <h3 class="text-sm font-medium text-gray-800 dark:text-neutral-200">
+                                                    No applicants
+                                                </h3>
+                                            </div>
+                                        </div>
+                                @endforelse
+                            @endhaspermission
                         </ul>
                     </div>
                 </div>

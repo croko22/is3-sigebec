@@ -33,7 +33,7 @@
                 </div>
 
                 <ul class="max-w-lg divide-y divide-gray-200 dark:divide-gray-700">
-                    @forelse ($course->students as $student)
+                    @forelse ($scholarship->students as $student)
                         <li class="pb-3 sm:pb-4">
                             <div class="flex items-center justify-between space-x-4 rtl:space-x-reverse">
                                 <div class="flex-shrink-0">

@@ -13,9 +13,9 @@
         {{ $lesson->date }}
     </td>
     <td class="px-6 py-4">
-        {{ $lesson->attendance->count() }} / {{ $course->students->count() }}
+        {{ $lesson->attendance->count() }} / {{ $scholarship->students->count() }}
     </td>
     <td class="px-6 py-4">
-        <livewire:modals.take-attendance :lesson="$lesson" :course="$course" />
+        <livewire:modals.take-attendance :lesson="$lesson" :scholarship="$scholarship" />
     </td>
 </tr>

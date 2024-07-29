@@ -10,7 +10,7 @@ class TakeAttendance extends Component
 {
     public $lesson;
     public $attendance;
-    public $course;
+    public $scholarship;
 
     public function mount($lesson)
     {
@@ -22,8 +22,8 @@ class TakeAttendance extends Component
     public function render()
     {
         return view('livewire.modals.take-attendance', [
-            'course' => $this->lesson->course,
-            'students' => $this->lesson->course->students,
+            'scholarship' => $this->lesson->scholarship,
+            'students' => $this->lesson->scholarship->students,
             'attendance' => $this->attendance,
         ]);
     }

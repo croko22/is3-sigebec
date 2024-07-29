@@ -1,5 +1,5 @@
 <div class="mt-5">
-    <h1>Attendance</h1>
+    <h1>Calls</h1>
 
     <div x-data="{ modalOpen: $wire.entangle('modalOpen') }">
         <button @click="modalOpen =!modalOpen" class="flex items-center button-primary gap-x-2">
@@ -9,7 +9,7 @@
                 <path d="M5 12h14" />
                 <path d="M12 5v14" />
             </svg>
-            New attendance session
+            New scholarship call
         </button>
         <div x-show="modalOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
             aria-modal="true">
@@ -28,7 +28,7 @@
                     x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     class="inline-block w-full max-w-xl p-8 my-20 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl 2xl:max-w-2xl">
                     <div class="flex items-center justify-between space-x-4">
-                        <h1 class="text-xl font-medium text-gray-800 ">Create course</h1>
+                        <h1 class="text-xl font-medium text-gray-800 ">Create scholarship</h1>
 
                         <button @click="modalOpen = false" class="text-gray-600 focus:outline-none hover:text-gray-700">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
@@ -46,29 +46,13 @@
                             <form class="p-4 md:p-5" wire:submit.prevent="createLesson">
                                 <div class="grid grid-cols-2 gap-4 mb-4">
                                     <div class="col-span-2 sm:col-span-1">
-                                        <label for="price"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select
-                                            time:</label>
-                                        <div class="relative max-w-sm">
-                                            <div
-                                                class="absolute inset-y-0 end-0 top-0 flex items-center pe-3.5 pointer-events-none">
-                                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                                                    viewBox="0 0 24 24">
-                                                    <path fill-rule="evenodd"
-                                                        d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12Zm11-4a1 1 0 1 0-2 0v4a1 1 0 0 0 .293.707l3 3a1 1 0 0 0 1.414-1.414L13 11.586V8Z"
-                                                        clip-rule="evenodd" />
-                                                </svg>
-                                            </div>
-
-                                            <input type="time" id="time" wire:model="time"
-                                                class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                min="09:00" max="18:00" value="00:00" required />
-                                        </div>
+                                        <label for="price" class="label">Start Date</label>
+                                        <input type="date" id="date" wire:model="date"
+                                            class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            required />
                                     </div>
                                     <div class="col-span-2 sm:col-span-1">
-                                        <label for="price"
-                                            class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Date</label>
+                                        <label for="price" class="label">End Date</label>
                                         <input type="date" id="date" wire:model="date"
                                             class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             required />
@@ -103,8 +87,8 @@
                             d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm3.982 13.982a1 1 0 0 1-1.414 0l-3.274-3.274A1.012 1.012 0 0 1 9 10V6a1 1 0 0 1 2 0v3.586l2.982 2.982a1 1 0 0 1 0 1.414Z" />
                     </svg>
                     Last 30 days
-                    <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                        fill="none" viewBox="0 0 10 6">
+                    <svg class="w-2.5 h-2.5 ms-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 10 6">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                             d="m1 1 4 4 4-4" />
                     </svg>
@@ -217,7 +201,7 @@
             </thead>
             <tbody>
                 @forelse ($lessons as $lesson)
-                    <livewire:lesson-row :lesson="$lesson" :course="$course" :key="$lesson->id" />
+                    <livewire:lesson-row :lesson="$lesson" :scholarship="$scholarship" :key="$lesson->id" />
                 @empty
                     <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                         <td class="px-6 py-4" colspan="5">
