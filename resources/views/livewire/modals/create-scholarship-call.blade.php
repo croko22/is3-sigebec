@@ -6,7 +6,7 @@
             <path d="M5 12h14" />
             <path d="M12 5v14" />
         </svg>
-        Create scholarship
+        Create scholarship call
     </button>
 
     <div x-show="modalOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
@@ -38,24 +38,31 @@
                 </div>
 
                 <div class="p-4 space-y-4 md:p-5">
-                    <form wire:submit.prevent="createscholarship">
-                        <div class="form-group">
-                            <label for="name" class="label">Name:</label>
-                            <input wire:model="name" type="text" class="input" id="name" required>
-                            @error('name')
-                                <span class="invalid-feedback">{{ $description }}</span>
-                            @enderror
-                        </div>
+                    <form wire:submit.prevent="createScholarshipCall">
+                        <div class="grid grid-cols-2 gap-4 mb-4">
+                            <div class="col-span-2 sm:col-span-1">
+                                <label for="price" class="label">Start Date</label>
+                                <input type="date" id="date" wire:model="start_date"
+                                    class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    required />
+                            </div>
+                            <div class="col-span-2 sm:col-span-1">
+                                <label for="price" class="label">End Date</label>
+                                <input type="date" id="date" wire:model="end_date"
+                                    class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    required />
+                            </div>
 
-                        <div class="my-5 form-group">
-                            <label for="description" class="label">Description:</label>
-                            <x-tinymce wire:model="description" />
-                            @error('description')
-                                <span class="invalid-feedback">{{ $description }}</span>
-                            @enderror
-                        </div>
+                            <label for="scholarship" class="label">Scholarship</label>
+                            <select id="scholarship" wire:model="selectedScholarship"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                <option selected>Choose a scholarship</option>
+                                @foreach ($scholarships as $scholarship)
+                                    <option value="{{ $scholarship->id }}">{{ $scholarship->name }}</option>
+                                @endforeach
+                            </select>
 
-                        <button class="button-primary" type="submit">Add Scholarship</button>
+                            <button class="button-primary" type="submit">Add Scholarship</button>
                     </form>
                 </div>
             </div>

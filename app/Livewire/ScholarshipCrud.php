@@ -2,7 +2,6 @@
 
 namespace App\Livewire;
 
-use App\Models\User;
 use Livewire\Attributes\Layout;
 use Livewire\Attributes\On;
 use Livewire\WithPagination;
@@ -24,18 +23,18 @@ class ScholarshipCrud extends Component
     public function render()
     {
         $searchTerm = '%' . $this->query . '%';
-        $user = User::find(auth()->user()->id);
 
-        $query = Scholarship::query();
-        $query->where('name', 'like', $searchTerm)
-            ->orWhere('description', 'like', $searchTerm);
-
-        $scholarships = $query->orderBy('created_at', 'desc')->paginate(9);
+        $scholarships = Scholarship::
+            where(function ($query) use ($searchTerm) {
+                $query->where('name', 'like', $searchTerm)
+                    ->orWhere('description', 'like', $searchTerm);
+            })
+            ->paginate(10);
 
         return view('livewire.scholarship-crud', compact('scholarships'));
     }
 
-    public function deletescholarship(int $scholarshipId)
+    public function deleteScholarship(int $scholarshipId)
     {
         Scholarship::destroy($scholarshipId);
         $this->dispatch('scholarship-deleted', ['message' => 'scholarship deleted successfully!'])->self();

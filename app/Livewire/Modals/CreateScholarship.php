@@ -32,6 +32,6 @@ class CreateScholarship extends Component
         Scholarship::create($this->pull());
         $this->reset();
         $this->description = '';
-        $this->dispatch('scholarship-created', ['message' => 'scholarship created successfully!']);
+        $this->dispatch('scholarship-created', ['message' => 'Scholarship created successfully!']);
     }
 }
