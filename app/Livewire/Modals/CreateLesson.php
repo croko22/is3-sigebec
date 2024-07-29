@@ -11,9 +11,9 @@ class CreateLesson extends Component
 {
     public $scholarship;
     #[Validate('required')]
-    public $date = null;
+    public $start_date = null;
     #[Validate('required')]
-    public $time = null;
+    public $end_date = null;
     public $modalOpen = false;
 
 

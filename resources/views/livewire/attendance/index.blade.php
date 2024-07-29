@@ -47,13 +47,13 @@
                                 <div class="grid grid-cols-2 gap-4 mb-4">
                                     <div class="col-span-2 sm:col-span-1">
                                         <label for="price" class="label">Start Date</label>
-                                        <input type="date" id="date" wire:model="date"
+                                        <input type="date" id="date" wire:model="start_date"
                                             class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             required />
                                     </div>
                                     <div class="col-span-2 sm:col-span-1">
                                         <label for="price" class="label">End Date</label>
-                                        <input type="date" id="date" wire:model="date"
+                                        <input type="date" id="date" wire:model="end_date"
                                             class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             required />
                                     </div>
@@ -189,10 +189,10 @@
                         ID
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Date
+                        Start Date
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Present Students
+                        End Date
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Action

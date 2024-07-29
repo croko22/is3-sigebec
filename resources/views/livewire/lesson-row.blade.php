@@ -10,12 +10,17 @@
         {{ $lesson->id }}
     </th>
     <td class="px-6 py-4">
-        {{ $lesson->date }}
+        {{ $lesson->start_date }}
+    </td>
+
+    <td class="px-6 py-4">
+        {{ $lesson->end_date }}
     </td>
     <td class="px-6 py-4">
-        {{ $lesson->attendance->count() }} / {{ $scholarship->students->count() }}
+        {{-- {{ $lesson->attendance->count() }} / {{ $scholarship->students->count() }} --}}
+        777
     </td>
     <td class="px-6 py-4">
-        <livewire:modals.take-attendance :lesson="$lesson" :scholarship="$scholarship" />
+        {{-- <livewire:modals.take-attendance :lesson="$lesson" :scholarship="$scholarship" /> --}}
     </td>
 </tr>

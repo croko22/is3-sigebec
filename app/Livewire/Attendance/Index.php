@@ -12,7 +12,8 @@ class Index extends Component
 {
     use WithPagination;
     public $scholarship;
-    public $date = null;
+    public $start_date;
+    public $end_date;
     public $time = "9:00";
     public $modalOpen = false;
     public $selectedRows = [];
@@ -32,9 +33,9 @@ class Index extends Component
 
     public function createLesson()
     {
-        $specificDate = $this->date . ' ' . $this->time;
         $this->scholarship->calls()->create([
-            'date' => $specificDate,
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
         ]);
 
         $this->dispatch('lesson-created', ['message' => 'Lesson created successfully!']);
