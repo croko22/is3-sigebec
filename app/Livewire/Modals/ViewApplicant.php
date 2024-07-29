@@ -33,5 +33,6 @@ class ViewApplicant extends Component
         $this->applicant->update([
             'status' => 'rejected'
         ]);
+        $this->dispatch('user-updated', ['message' => 'user updated successfully!']);
     }
 }
