@@ -15,7 +15,7 @@ class CreateScholarshipCall extends Component
     #[Validate('required')]
     public $end_date = null;
     #[Validate('required')]
-    public string $selectedScholarship;
+    public string $scholarship_id = '';
     public bool $modalOpen = false;
     public $scholarships;
 
@@ -24,12 +24,6 @@ class CreateScholarshipCall extends Component
     {
         $this->modalOpen = false;
     }
-
-    // public function mount()
-    // // public function mount($scholarships)
-    // {
-    //     $this->scholarships = Scholarship::all();
-    // }
 
     public function render()
     {
@@ -41,14 +35,7 @@ class CreateScholarshipCall extends Component
     public function createScholarshipCall()
     {
         $this->validate();
-        $this->selectedScholarship = (int) $this->selectedScholarship;
-        ScholarshipCall::create([
-            'start_date' => $this->start_date,
-            'end_date' => $this->end_date,
-            'scholarship_id' => $this->selectedScholarship,
-        ]);
-        // ScholarshipCall::create($this->pull());
-        // dd($this->pull());
+        ScholarshipCall::create($this->pull());
         $this->reset();
         $this->description = '';
         $this->dispatch('scholarship-call-created', ['message' => 'Scholarship call created successfully!']);
