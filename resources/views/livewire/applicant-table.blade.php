@@ -3,7 +3,7 @@
     <x-toast event="applicant-added" message="Student added successfully!" />
     <x-toast event="applicant-updated" message="Student updated successfully!" />
 
-    <div class="flex flex-col">
+    <div class="flex flex-col mb-7">
         <div class="-m-1.5 overflow-x-auto">
             <div class="p-1.5 min-w-full inline-block align-middle">
                 <div
@@ -12,14 +12,14 @@
                         class="grid gap-3 px-6 py-4 border-b border-gray-200 md:flex md:justify-between md:items-center dark:border-neutral-700">
                         <div>
                             <h2 class="text-xl font-semibold text-gray-800 dark:text-neutral-200">
-                                applicants
+                                Applicants
                             </h2>
                             <p class="text-sm text-gray-600 dark:text-neutral-400">
                                 Add applicants, edit and more.
                             </p>
                         </div>
 
-                        <x-search :query="$query" placeholder="Search applicants..." />
+                        <x-search :query="$query" placeholder="Search applicants..." wire:click='search' />
 
                         <div>
                             <div class="inline-flex gap-x-2">
@@ -31,8 +31,6 @@
                                     </svg>
                                     Delete selected
                                 </button>
-
-                                <livewire:modals.create-applicant />
                             </div>
                         </div>
                     </div>
@@ -65,7 +63,7 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3 text-start">
-                    <div class="flex items-center gap-x-2">
+                    <div class="flex items-center gap-x-2 justify-center" >
                         <span class="text-xs font-semibold tracking-wide text-gray-800 uppercase dark:text-neutral-200">
                             Status
                         </span>
@@ -73,22 +71,28 @@
                 </th>
 
                 <th scope="col" class="px-6 py-3 text-start">
-                    <div class="flex items-center gap-x-2">
+                    <div class="flex items-center gap-x-2 justify-center">
                         <span class="text-xs font-semibold tracking-wide text-gray-800 uppercase dark:text-neutral-200">
-                            scholarships
+                            Convocatoria
                         </span>
                     </div>
                 </th>
 
                 <th scope="col" class="px-6 py-3 text-start">
-                    <div class="flex items-center gap-x-2">
+                    <div class="flex items-center gap-x-2 justify-center">
                         <span class="text-xs font-semibold tracking-wide text-gray-800 uppercase dark:text-neutral-200">
-                            Created
+                            Fecha de envio
                         </span>
                     </div>
                 </th>
 
-                <th scope="col" class="px-6 py-3 text-end"></th>
+                <th scope="col" class="px-6 py-3 text-start">
+                    <div class="flex items-center gap-x-2 justify-center">
+                        <span class="text-xs font-semibold tracking-wide text-gray-800 uppercase dark:text-neutral-200">
+                            Ver 
+                        </span>
+                    </div>
+                </th>
             </tr>
         </thead>
 

@@ -6,6 +6,7 @@ use App\Models\User;
 use Livewire\Attributes\Layout;
 use Livewire\Component;
 use Livewire\WithPagination;
+use App\Models\Applicant;
 
 #[Layout('components.layouts.app')]
 class ApplicantTable extends Component
@@ -26,13 +27,7 @@ class ApplicantTable extends Component
 
     public function render()
     {
-        $applicants = User::role(['applicant', 'admin'])
-            ->where(function ($query) {
-                $query->where('name', 'like', '%' . $this->query . '%')
-                    ->orWhere('email', 'like', '%' . $this->query . '%');
-            })
-            ->orderBy('updated_at', 'desc')
-            ->paginate(10);
+        $applicants = Applicant::paginate(7);
         return view('livewire.applicant-table', compact('applicants'));
     }
 

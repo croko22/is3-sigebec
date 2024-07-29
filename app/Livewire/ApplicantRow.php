@@ -16,6 +16,7 @@ class applicantRow extends Component
     }
     public function render()
     {
+        
         return view('livewire.applicant-row', [
             'applicant' => $this->applicant
         ]);
