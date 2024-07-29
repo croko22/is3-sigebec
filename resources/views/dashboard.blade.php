@@ -3,9 +3,9 @@
         <h1>Dashboard</h1>
         <div class="p-4 space-y-4 sm:p-6 sm:space-y-6">
             <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4 sm:gap-6">
-                <x-dashboard.header-card label="Welcome" :value="auth()->user()->name" />
-                <x-dashboard.header-card label="Total scholarships" :value="$scholarshipsCount" />
-                <x-dashboard.header-card label="Total applicants" :value="$applicantsCount" />
+                <x-dashboard.header-card label="Bienvenido" :value="auth()->user()->name" />
+                <x-dashboard.header-card label="Total de becas" :value="$scholarshipsCount" />
+                <x-dashboard.header-card label="Total de postulantes" :value="$applicantsCount" />
             </div>
 
             <div class="grid gap-4 lg:grid-cols-2 sm:gap-6">
@@ -15,9 +15,12 @@
                     <div class="flex items-center justify-between">
                         <div>
                             <h2 class="text-sm text-gray-500 dark:text-neutral-500">
-                                Scholarships
+                                Becas en convocatoria
                             </h2>
                         </div>
+                        <a class="text-sm font-semibold text-gray-800 dark:text-neutral-200 hover:underline hover:font-bold hover:cursor-pointer">
+                            Ver todas las becas
+                        </a>
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         @foreach ($scholarships as $index => $scholarship)
@@ -34,7 +37,7 @@
                     <div class="flex items-center justify-between">
                         <div>
                             <h2 class="text-sm text-gray-500 dark:text-neutral-500">
-                                Applicants
+                                Postulantes
                             </h2>
                         </div>
                     </div>
