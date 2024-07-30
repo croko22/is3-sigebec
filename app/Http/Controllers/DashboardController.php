@@ -24,7 +24,7 @@ class DashboardController extends Controller
         if (auth()->user()->hasRole('admin')) {
             $applicants = User::role('applicant')->take(6)->get();
             $scholarships = $allCalls;
-
+           
             return view('dashboard', compact('scholarships', 'scholarshipsCount', 'applicantsCount', 'applicants' , 'applicant'));
         } else {
             $scholarships = $allCalls->where('start_date', '<=', Carbon::now())->where('end_date', '>=', Carbon::now());

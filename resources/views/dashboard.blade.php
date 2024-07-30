@@ -23,7 +23,7 @@
                         </a>
                     </div>
                     <div class="grid grid-cols-2 gap-4">
-                        @if ($applicant > 0)
+                        @if ($applicant > 0 && !auth()->user()->hasRole('admin'))
                             <h4>Usted ya esta aplicando a una beca</h4>
                         @else
                             @foreach ($scholarships as $index => $scholarship)

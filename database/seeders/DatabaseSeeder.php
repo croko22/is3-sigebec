@@ -20,7 +20,6 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('password'),
         ]);
         $adminUser->assignRole('admin');
-
         $applicants = User::factory(10)->create();
         $applicants->each(function ($applicant) {
             $applicant->assignRole('applicant');
@@ -41,13 +40,6 @@ class DatabaseSeeder extends Seeder
                 'end_date' => now()->addDays(10),
                 'scholarship_id' => $scholarship->id,
                 ],
-                [
-                'name' => $scholarship->name . ' Call',
-                'description' => 'Description for ' . $scholarship->name . ' Call',
-                'start_date' => now()->addMonth(),
-                'end_date' => now()->addMonths(2),
-                'scholarship_id' => $scholarship->id,
-                ]
         ]);
         });
         
