@@ -3,15 +3,15 @@
     <x-toast event="scholarship-deleted" message="Scholarship deleted successfully!" />
 
     <div class="flex flex-col">
-        <div>
-            <div class="flex items-center justify-between">
+        <div class="flex flex-col lg:flex-row justify-between w-[80%] mx-auto gap-y-2">
+            <div class="flex items-center justify-between gap-x-2">
 
                 @can('create scholarship')
                     <livewire:modals.create-scholarship />
                     <livewire:modals.create-scholarship-call :scholarships="$scholarships" />
                 @endcan
             </div>
-            <x-search :query="$query" placeholder="Search scholarships..." />
+            <x-search :query="$query" placeholder="Search scholarships..." class="max-w-max md:max-w-sm mx-0"/>
         </div>
 
         <section class="mt-5 text-gray-600 body-font">

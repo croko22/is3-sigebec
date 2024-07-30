@@ -15,7 +15,7 @@ class CreateScholarshipCall extends Component
     #[Validate('required')]
     public $end_date = null;
     #[Validate('required')]
-    public string $selectedScholarship;
+    public string $selectedScholarship="";
     public bool $modalOpen = false;
     public $scholarships;
 
@@ -41,8 +41,14 @@ class CreateScholarshipCall extends Component
     public function createScholarshipCall()
     {
         $this->validate();
+        $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+        $beca = Scholarship::find((int)$this->selectedScholarship);
+        $month = date('m', strtotime($this->start_date));
+        $becaName = $beca?->name." - ".$meses[$month-1];
         $this->selectedScholarship = (int) $this->selectedScholarship;
         ScholarshipCall::create([
+            'name'=>$becaName,
+            'description' => '',
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
             'scholarship_id' => $this->selectedScholarship,

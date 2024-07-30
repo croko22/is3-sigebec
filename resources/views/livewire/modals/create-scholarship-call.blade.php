@@ -1,5 +1,5 @@
 <div x-data="{ modalOpen: $wire.entangle('modalOpen') }">
-    <button @click="modalOpen =!modalOpen" class="flex items-center button-primary gap-x-2">
+    <button @click="modalOpen =!modalOpen" class="flex items-center button-secondary gap-x-2">
         <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
             stroke-linejoin="round">
@@ -38,11 +38,20 @@
                 </div>
 
                 <div class="p-4 space-y-4 md:p-5">
+                    <h1 class="text-gray-500">
+                        @php
+                            $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+                            $beca = App\Models\Scholarship::find((int)$selectedScholarship);
+                            $month = date('m', strtotime($start_date));
+                            $becaName = $beca?->name." - ".$meses[$month-1];
+                        @endphp
+                        {{ $selectedScholarship!=""?$becaName:"Nombre de la Convocatoria" }}
+                    </h1>
                     <form wire:submit.prevent="createScholarshipCall">
-                        <div class="grid grid-cols-2 gap-4 mb-4">
+                        <div class="grid grid-cols-2 gap-4">
                             <div class="col-span-2 sm:col-span-1">
                                 <label for="price" class="label">Start Date</label>
-                                <input type="date" id="date" wire:model="start_date"
+                                <input type="date" id="date" wire:model.live="start_date"
                                     class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     required />
                             </div>
@@ -52,17 +61,19 @@
                                     class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     required />
                             </div>
+                            <div class="col-span-2">
+                                <label for="scholarship" class="label">Scholarship</label>
+                                <select id="scholarship" wire:model.live="selectedScholarship"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                    <option selected>Choose a scholarship</option>
+                                    @foreach ($scholarships as $scholarship)
+                                        <option value="{{ $scholarship->id }}">{{ $scholarship->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
 
-                            <label for="scholarship" class="label">Scholarship</label>
-                            <select id="scholarship" wire:model="selectedScholarship"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                <option selected>Choose a scholarship</option>
-                                @foreach ($scholarships as $scholarship)
-                                    <option value="{{ $scholarship->id }}">{{ $scholarship->name }}</option>
-                                @endforeach
-                            </select>
-
-                            <button class="button-primary" type="submit">Add Scholarship</button>
+                            <button class="button-primary col-span-2" type="submit">Add Scholarship</button>
+                        </div>
                     </form>
                 </div>
             </div>

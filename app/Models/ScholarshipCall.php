@@ -9,7 +9,7 @@ class ScholarshipCall extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['start_date', 'end_date', 'scholarship_id'];
+    protected $fillable = ['name','description','start_date', 'end_date', 'scholarship_id'];
 
     protected $casts = [
         'start_date' => 'datetime',
