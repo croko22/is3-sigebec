@@ -61,18 +61,21 @@
                                     class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     required />
                             </div>
-                            <div class="col-span-2">
-                                <label for="scholarship" class="label">Scholarship</label>
-                                <select id="scholarship" wire:model.live="selectedScholarship"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option selected>Choose a scholarship</option>
-                                    @foreach ($scholarships as $scholarship)
-                                        <option value="{{ $scholarship->id }}">{{ $scholarship->name }}</option>
-                                    @endforeach
-                                </select>
+                            <div class="col-span-2 sm:col-span-1">
+                                    <label for="scholarship" class="label">Scholarship</label>
+                                    <select id="scholarship" wire:model.live="scholarship_id"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                                        <option selected>Choose a scholarship</option>
+                                        @foreach ($scholarships as $scholarship)
+                                            <option value="{{ $scholarship->id }}">{{ $scholarship->name }}</option>
+                                        @endforeach
+                                    </select>
+                                @error('scholarship_id')
+                                    <span class="text-red-500">{{ $message }}</span>
+                                @enderror
                             </div>
 
-                            <button class="button-primary col-span-2" type="submit">Add Scholarship</button>
+                            <button class="button-primary col-span-2" type="submit">Add Scholarship Call</button>
                         </div>
                     </form>
                 </div>

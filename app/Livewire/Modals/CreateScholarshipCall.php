@@ -25,12 +25,6 @@ class CreateScholarshipCall extends Component
         $this->modalOpen = false;
     }
 
-    // public function mount()
-    // // public function mount($scholarships)
-    // {
-    //     $this->scholarships = Scholarship::all();
-    // }
-
     public function render()
     {
         return view('livewire.modals.create-scholarship-call', [
