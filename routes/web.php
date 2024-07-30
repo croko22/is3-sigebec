@@ -5,13 +5,16 @@ use App\Http\Controllers\AuthController;
 use App\Livewire\ApplicantTable;
 use App\Livewire\ScholarshipCrud;
 use App\Livewire\Scholarship\Show as ScholarshipShow;
+use App\Livewire\Scholarship\Call as ScholarshipCall;
 use App\Livewire\Attendance\Index as AttendanceIndex;
+
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/scholarship', ScholarshipCrud::class)->name('scholarship');
     Route::get('/scholarship/{scholarship}', ScholarshipShow::class)->name('scholarship.show');
+    Route::get('/scholarshipcall/{scholarshipcall}', ScholarshipCall::class)->name('scholarship.call');
 
     Route::group(['middleware' => ['role:admin']], function () {
         Route::get('/applicant', ApplicantTable::class)->name('applicant');

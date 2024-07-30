@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Applicant;
 use App\Models\User;
 use App\Models\Scholarship;
 use App\Models\ScholarshipCall;
@@ -16,6 +17,7 @@ class DashboardController extends Controller
     {
         $applicantsCount = User::role('applicant')->count();
         $scholarshipsCount = Scholarship::count();
+        $applicant = Applicant::where('user_id', auth()->user()->id)->count();
         
         $allCalls = ScholarshipCall::with(['scholarship'])->where('end_date', '>=', Carbon::now())->get();
         
@@ -23,12 +25,11 @@ class DashboardController extends Controller
             $applicants = User::role('applicant')->take(6)->get();
             $scholarships = $allCalls;
 
-            return view('dashboard', compact('scholarships', 'scholarshipsCount', 'applicantsCount', 'applicants'));
+            return view('dashboard', compact('scholarships', 'scholarshipsCount', 'applicantsCount', 'applicants' , 'applicant'));
         } else {
             $scholarships = $allCalls->where('start_date', '<=', Carbon::now())->where('end_date', '>=', Carbon::now());
             $scholarshipsFutures = $allCalls->where('start_date', '>', Carbon::now());
-            
-            return view('dashboard', compact('scholarships','scholarshipsFutures' , 'scholarshipsCount', 'applicantsCount'));
+            return view('dashboard', compact('scholarships','scholarshipsFutures' , 'scholarshipsCount', 'applicantsCount' , 'applicant'));
         }
 
     }

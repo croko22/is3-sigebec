@@ -23,9 +23,13 @@
                         </a>
                     </div>
                     <div class="grid grid-cols-2 gap-4">
-                        @foreach ($scholarships as $index => $scholarship)
-                            <x-dashboard.scholarship-pill :scholarship="$scholarship" :index="$index" />
-                        @endforeach
+                        @if ($applicant > 0)
+                            <h4>Usted ya esta aplicando a una beca</h4>
+                        @else
+                            @foreach ($scholarships as $index => $scholarship)
+                                <x-dashboard.scholarship-pill :scholarship="$scholarship" :index="$index" />
+                            @endforeach
+                        @endif
                     </div>
                 </div>
                 <!-- End Card -->

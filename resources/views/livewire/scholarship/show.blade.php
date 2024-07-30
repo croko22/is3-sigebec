@@ -1,8 +1,8 @@
 <div>
     @cannot('edit scholarship')
-        <h1 class="text-6xl font-extrabold dark:text-white">Scholarship: <small
+        <h1 class="text-6xl font-extrabold dark:text-white">Beca: <small
                 class="font-semibold text-gray-500 ms-2 dark:text-gray-400">{{ $scholarship->name }}</small></h1>
-        <p class="text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">{{ $scholarship->description }}</p>
+        
     @endcannot
 
     @can('edit scholarship')

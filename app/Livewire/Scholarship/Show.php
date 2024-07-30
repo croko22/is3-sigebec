@@ -7,9 +7,11 @@ use App\Models\Student;
 use App\Models\User;
 use Livewire\Component;
 
+use function Laravel\Prompts\error;
+
 class Show extends Component
 {
-    public scholarship $scholarship;
+    public Scholarship $scholarship;
     public $name;
     public $description;
     public $applicants;
@@ -17,8 +19,9 @@ class Show extends Component
     public $students;
     public $selectedNewStudent;
 
-    public function mount(scholarship $scholarship)
+    public function mount(Scholarship $scholarship)
     {
+        $this->scholarship = $scholarship;
         $this->scholarship = $scholarship;
         $this->name = $scholarship->name;
         $this->description = $scholarship->description;
@@ -49,7 +52,6 @@ class Show extends Component
         ]);
 
         $this->dispatch('scholarship-updated', ['message' => 'scholarship updated successfully!']);
-
     }
 
     public function addStudent()
@@ -67,4 +69,5 @@ class Show extends Component
         $this->scholarship->students()->detach($studentId);
         $this->scholarship = scholarship::find($this->scholarship->id);
     }
+
 }
