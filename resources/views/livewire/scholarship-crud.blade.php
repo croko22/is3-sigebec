@@ -11,7 +11,7 @@
                     <livewire:modals.create-scholarship-call :scholarships="$scholarships" />
                 @endcan
             </div>
-            <x-search :query="$query" placeholder="Search scholarships..." class="max-w-max md:max-w-sm mx-0"/>
+            <x-search :query="$query" placeholder="Search scholarships..." class="mx-0"/>
         </div>
 
         <section class="mt-5 text-gray-600 body-font">

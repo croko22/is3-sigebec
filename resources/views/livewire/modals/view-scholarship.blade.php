@@ -1,6 +1,6 @@
 <div x-data="{ modelOpen: false }">
     <button @click="modelOpen =!modelOpen" class="button-primary" type="button">
-        View Scholarship
+        Vizualizar información
     </button>
     <div x-show="modelOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
         aria-modal="true">
@@ -29,7 +29,7 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                         </svg>
-                        <span class="sr-only">Close modal</span>
+                        <span class="sr-only">Cerrar</span>
                     </button>
                 </div>
                 <!-- Modal body -->
@@ -65,15 +65,15 @@
                 <div class="flex items-center p-4 border-t border-gray-200 rounded-b md:p-5 dark:border-gray-600">
                     @can('edit scholarship')
                         <a data-modal-hide="modal-{{ $scholarship->id }}"
-                            href="{{ route('scholarship.show', $scholarship) }}" class="button-primary">Edit</a>
+                            href="{{ route('scholarship.show', $scholarship) }}" class="button-primary">Editar</a>
                         <button data-modal-hide="modal-{{ $scholarship->id }}" type="button"
                             wire:click="$parent.$parent.deleteScholarship({{ $scholarship->id }})"
                             wire:confirm="Are you sure you want to delete this scholarship?"
-                            class="ml-2 button-danger">Delete</button>
+                            class="ml-2 button-danger">Eliminar</button>
                     @endcan
                     @can('take attendance')
                         <a data-modal-hide="modal-{{ $scholarship->id }}"
-                            href="{{ route('scholarship.show', $scholarship) }}" class="button-primary">View scholarship</a>
+                            href="{{ route('scholarship.show', $scholarship) }}" class="button-primary">Ver información</a>
                     @endcan
                 </div>
             </div>

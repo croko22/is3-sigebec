@@ -6,7 +6,7 @@
             <path d="M5 12h14" />
             <path d="M12 5v14" />
         </svg>
-        Create scholarship call
+        Crear Convocatoria
     </button>
 
     <div x-show="modalOpen" class="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog"
@@ -26,7 +26,7 @@
                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 class="inline-block w-full max-w-xl p-8 my-20 overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl 2xl:max-w-2xl">
                 <div class="flex items-center justify-between space-x-4">
-                    <h1 class="text-xl font-medium text-gray-800">Create scholarship</h1>
+                    <h1 class="text-xl font-medium text-gray-800">Crear convocatoria de una beca</h1>
 
                     <button @click="modalOpen = false" class="text-gray-600 focus:outline-none hover:text-gray-700">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24"
@@ -41,27 +41,27 @@
                     <h1 class="text-gray-500">
                         @php
                             $meses = array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
-                            $beca = App\Models\Scholarship::find((int)$selectedScholarship);
+                            $beca = App\Models\Scholarship::find((int)$scholarship_id);
                             $month = date('m', strtotime($start_date));
                             $becaName = $beca?->name." - ".$meses[$month-1];
                         @endphp
-                        {{ $selectedScholarship!=""?$becaName:"Nombre de la Convocatoria" }}
+                        {{ $scholarship_id!=""?$becaName:"Nombre de la Convocatoria" }}
                     </h1>
                     <form wire:submit.prevent="createScholarshipCall">
                         <div class="grid grid-cols-2 gap-4">
                             <div class="col-span-2 sm:col-span-1">
-                                <label for="price" class="label">Start Date</label>
+                                <label for="price" class="label">Inicio de convocatoria</label>
                                 <input type="date" id="date" wire:model.live="start_date"
                                     class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     required />
                             </div>
                             <div class="col-span-2 sm:col-span-1">
-                                <label for="price" class="label">End Date</label>
+                                <label for="price" class="label">Fin de convocatoria</label>
                                 <input type="date" id="date" wire:model="end_date"
                                     class="bg-gray-50 border leading-none border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     required />
                             </div>
-                            <div class="col-span-2 sm:col-span-1">
+                            <div class="col-span-2">
                                     <label for="scholarship" class="label">Scholarship</label>
                                     <select id="scholarship" wire:model.live="scholarship_id"
                                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
@@ -75,7 +75,7 @@
                                 @enderror
                             </div>
 
-                            <button class="button-primary col-span-2" type="submit">Add Scholarship Call</button>
+                            <button class="button-primary col-span-2" type="submit">Añadir convocatoria</button>
                         </div>
                     </form>
                 </div>
