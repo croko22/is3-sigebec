@@ -6,8 +6,10 @@ use App\Livewire\ApplicantTable;
 use App\Livewire\ScholarshipCrud;
 use App\Livewire\Scholarship\Show as ScholarshipShow;
 use App\Livewire\ScholarshipCall\Call as ScholarshipCall;
+use App\Livewire\ScholarshipCall\Edit as ScholarshipCallEdit;
 use App\Livewire\Attendance\Index as AttendanceIndex;
 use App\Livewire\ScholarshipCall\Index as scholarshipcallIndex;
+use Illuminate\Support\Facades\Route;
 
 
 Route::middleware(['auth'])->group(function () {
@@ -17,6 +19,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/scholarship/{scholarship}', ScholarshipShow::class)->name('scholarship.show');
     Route::get('/scholarshipcall', scholarshipcallIndex::class)->name('scholarshipcall');
     Route::get('/scholarshipcall/{scholarshipcall}', ScholarshipCall::class)->name('scholarship.call');
+    Route::get('/scholarshipcall/{scholarshipcall}/edit', ScholarshipCallEdit::class)->name('scholarshipcall.edit');
 
     Route::group(['middleware' => ['role:admin']], function () {
         Route::get('/applicant', ApplicantTable::class)->name('applicant');

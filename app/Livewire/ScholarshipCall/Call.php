@@ -31,8 +31,8 @@ class Call extends Component
 
     public function render()
     {
-        return view('livewire.scholarship.call' , [
-            'scholarshipcall.call' => $this->scholarshipCall
+        return view('livewire.scholarship-call.call' , [
+            'scholarshipcall' => $this->scholarshipCall
         ]);
     }
 

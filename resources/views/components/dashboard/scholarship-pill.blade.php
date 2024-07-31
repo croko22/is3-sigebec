@@ -10,8 +10,8 @@
     ];
 @endphp
 <a href="{{ 
-auth()->user()->hasRole('admin') ? route('scholarship.show', $scholarship->scholarship->id) :
-        route('scholarship.call', $scholarship->id) }}"
+auth()->user()->hasRole('admin') ?route('scholarshipcall.edit', $scholarship->id) :
+      route('scholarship.call', $scholarship->id) }}"
     class=" group p-4 px-5 mb-2 relative flex justify-center items-center text-sm font-medium text-blue-100 text-center rounded-lg bg-gradient-to-r {{ $colors[$index % count($colors)] }}">
     <h4>{{ $scholarship->name }}</h4>
     <div class="absolute right-4 hidden group-hover:block hover:cursor-pointer group">
