@@ -2,7 +2,8 @@
 
 namespace App\Livewire\Attendance;
 
-use App\Models\scholarship;
+use App\Models\Scholarship;
+use App\Models\ScholarshipCall as Call;
 use App\Models\Lesson;
 use Livewire\Attributes\On;
 use Livewire\Component;
@@ -11,26 +12,26 @@ use Livewire\WithPagination;
 class Index extends Component
 {
     use WithPagination;
-    public $scholarship;
-    public $start_date;
-    public $end_date;
-    public $time = "9:00";
-    public $modalOpen = false;
-    public $selectedRows = [];
-
+    public Scholarship $scholarship;
+    public string $filter = '';
+    public function addFilter($filter)
+    {
+        $this->filter = $this->filter==''||$this->filter!=$filter? $filter:'';
+    }
     public function mount($scholarship)
     {
         $this->scholarship = $scholarship;
     }
 
-    #[On("lesson-created")]
     public function render()
     {
         return view('livewire.attendance.index', [
-            'lessons' => scholarship::find($this->scholarship->id)->calls()->paginate(11),
+            'calls' => Call::where('scholarship_id',$this->scholarship['id'])->paginate(11),
         ]);
     }
-
+    
+    /*
+    #[On("lesson-created")]
     public function createLesson()
     {
         $this->scholarship->calls()->create([
@@ -42,7 +43,6 @@ class Index extends Component
         $this->modalOpen = false;
         // $this->reset();
     }
-
     public function deleteMarked()
     {
         if (empty($this->selectedRows)) {
@@ -52,5 +52,5 @@ class Index extends Component
         $this->selectedRows = [];
 
         $this->dispatch('lesson-deleted', ['message' => 'Lessons deleted successfully!']);
-    }
+    }*/
 }

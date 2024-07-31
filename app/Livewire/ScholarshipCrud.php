@@ -24,13 +24,11 @@ class ScholarshipCrud extends Component
     {
         $searchTerm = '%' . $this->query . '%';
 
-        $scholarships = Scholarship::
-            where(function ($query) use ($searchTerm) {
+        $scholarships = Scholarship::where(function ($query) use ($searchTerm) {
                 $query->where('name', 'like', $searchTerm)
                     ->orWhere('description', 'like', $searchTerm);
             })
             ->paginate(10);
-
         return view('livewire.scholarship-crud', compact('scholarships'));
     }
 

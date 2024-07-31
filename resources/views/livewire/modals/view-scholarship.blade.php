@@ -37,6 +37,19 @@
                     <div>
                         {!! $scholarship->description !!}
                     </div>
+                    <div>
+                        <h3 class="mb-2 text-lg font-semibold">Convocatorias</h3>
+                        <ul class="pl-5 list-disc">
+                            @forelse ($scholarship->calls as $call)
+                                <li class="text-sm text-gray-700 grid grid-cols-2">
+                                    <p>{{ $call->name }}</p>
+                                    <p class="text-gray-600">{{ $call->start_date->format('d/m/Y') }} - {{ $call->end_date->format('d/m/Y') }}</p>
+                                </li>
+                            @empty
+                                <li class="text-sm text-gray-700">No requirements</li>
+                            @endforelse
+                        </ul>
+                    </div>
                     {{-- applicant --}}
                     {{-- <h3 class="mb-2 text-lg font-semibold">applicants</h3> --}}
                     {{-- <ul class="pl-5 list-disc">
