@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Scholarship;
+namespace App\Livewire\ScholarshipCall;
 
 use App\Models\ScholarshipCall;
 use Livewire\Component; 
@@ -32,7 +32,7 @@ class Call extends Component
     public function render()
     {
         return view('livewire.scholarship.call' , [
-            'scholarshipcall' => $this->scholarshipCall
+            'scholarshipcall.call' => $this->scholarshipCall
         ]);
     }
 

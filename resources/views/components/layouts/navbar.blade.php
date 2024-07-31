@@ -18,7 +18,7 @@
                     <span class="text-blue-500">-admin</span>
                 @endhasrole
                 @hasrole('applicant')
-                    <span class="text-green-500">-applicant</span>
+                    <span class="text-green-500">-postulante</span>
                 @endhasrole
             </a>
         </div>
@@ -26,31 +26,25 @@
         <!-- Button Group -->
         <div class="flex items-center py-1 gap-x-2 ms-auto md:ps-6 md:order-3 md:col-span-3">
             @auth
-                <a href={{ route('logout') }} class="button-auth">Logout</a>
+                <a href={{ route('logout') }} class="button-auth">Salir</a>
             @endauth
 
             @guest
-                <a href={{ route('login') }} class="button-auth">Log in</a>
+                <a href={{ route('login') }} class="button-auth">Iniciar Sesión</a>
             @endguest
         </div>
 
         <div class="row md:block md:w-auto md:basis-auto md:order-2 md:col-span-6">
-            @hasrole('admin')
-                <div
-                    class="flex flex-col mt-5 gap-y-4 gap-x-0 md:flex-row md:justify-center md:items-center md:gap-y-0 md:gap-x-7 md:mt-0">
-                    <a class="nav-link {{ request()->routeIs('scholarship') ? 'active' : '' }}" wire:navigate
-                        href={{ route('scholarship') }} aria-current="page">Scholarships</a>
-                    <a class="nav-link {{ request()->routeIs('applicant') ? 'active' : '' }}" wire:navigate
-                        href={{ route('applicant') }}>Applicants</a>
-                </div>
-            @endhasrole
-            @hasrole('applicant')
-                <div
-                    class="flex flex-col mt-5 gap-y-4 gap-x-0 md:flex-row md:justify-center md:items-center md:gap-y-0 md:gap-x-7 md:mt-0">
-                    <a class="nav-link {{ request()->routeIs('scholarship') ? 'active' : '' }}" wire:navigate
-                        href={{ route('scholarship') }} aria-current="page">Scholarships</a>
-                </div>
-            @endhasrole
+            <div class="flex flex-col mt-5 gap-y-4 gap-x-0 md:flex-row md:justify-center md:items-center md:gap-y-0 md:gap-x-7 md:mt-0">
+                <a class="nav-link {{ request()->routeIs('scholarship') ? 'active' : '' }}" wire:navigate
+                    href={{ route('scholarship') }} aria-current="page">Becas</a>
+                @hasrole('admin')
+                <a class="nav-link {{ request()->routeIs('applicant') ? 'active' : '' }}" wire:navigate
+                    href={{ route('applicant') }}>Postulaciones</a>
+                @endhasrole
+                <a class="nav-link {{ request()->routeIs('scholarshipcall') ? 'active' : '' }}" wire:navigate
+                    href={{ route('scholarshipcall') }} aria-current="page">Convocatorias</a>
+            </div>
         </div>
     </nav>
 </header>

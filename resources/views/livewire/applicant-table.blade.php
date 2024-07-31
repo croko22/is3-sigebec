@@ -19,7 +19,7 @@
                             </p>
                         </div>
 
-                        <x-search :query="$query" placeholder="Search applicants..." wire:click='search' />
+                        <x-search :query="$query" placeholder="Buscar Postulante..." wire:click='search' />
 
                         <div>
                             <div class="inline-flex gap-x-2">
