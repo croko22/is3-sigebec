@@ -60,7 +60,7 @@ h2 {
 
 //* NAVIGATION
 .nav-link {
-    @apply relative inline-block text-black dark:text-white hover:text-gray-600;
+    @apply relative inline-block text-black dark:text-white hover:font-semibold hover:text-gray-600;
     &.active {
         @apply before:absolute before:bottom-0.5 before:start-0 before:-z-[1] before:w-full before:h-1 before:bg-lime-400;
     }
