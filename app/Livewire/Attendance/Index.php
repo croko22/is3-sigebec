@@ -26,7 +26,16 @@ class Index extends Component
     public function render()
     {
         return view('livewire.attendance.index', [
-            'calls' => Call::where('scholarship_id',$this->scholarship['id'])->paginate(11),
+            'calls' => Call::where('scholarship_id',$this->scholarship['id'])->
+            when($this->filter, function ($query) {
+                match ($this->filter) {
+                    'active' => $query->where('start_date', '<=', now())->where('end_date', '>=', now()),
+                    'upcoming' => $query->where('start_date', '>', now()),
+                    'past' => $query->where('end_date', '<', now()),
+                    default => $query,
+                };
+                return $query;
+            })->paginate(11),
         ]);
     }
     

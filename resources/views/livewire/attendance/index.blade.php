@@ -15,11 +15,11 @@
     </div>
     <div class="w-full">
         <h2>Filtrar</h2>
-        <div class="mt-4 flex flex-row gap-8">
-            <a wire:click="addFilter('last')" class="cursor-pointer  border border-blue-700 @if($filter=='last') bg-blue-800 text-white hover:bg-white  hover:text-blue-800 @else text-blue-700 hover:text-white hover:bg-blue-800 @endif font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">
+        <div class="mt-4 flex flex-row gap-4">
+            <a wire:click="addFilter('past')" class="cursor-pointer  border border-blue-700 @if($filter=='past') bg-blue-800 text-white hover:bg-white  hover:text-blue-800 @else text-blue-700 hover:text-white hover:bg-blue-800 @endif font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">
             <div class="flex flex-row min-w-9 justify-center items-center gap-2">
                 <p>Pasadas</p>
-                @if($filter=='last')
+                @if($filter=='past')
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                     <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
                 </svg>
@@ -27,20 +27,20 @@
             </div>
             </a>
             
-            <a wire:click="addFilter('now')" class="cursor-pointer border border-gray-800 @if($filter=='now') bg-gray-800 text-white hover:bg-white  hover:text-gray-800 @else text-gray-700 hover:text-white hover:bg-gray-800 @endif  font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">
+            <a wire:click="addFilter('active')" class="cursor-pointer border border-gray-800 @if($filter=='active') bg-gray-800 text-white hover:bg-white  hover:text-gray-800 @else text-gray-700 hover:text-white hover:bg-gray-800 @endif  font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">
                 <div class="flex flex-row min-w-9 justify-center items-center gap-2">
                 <p>Vigentes</p>
-                @if($filter=='now')
+                @if($filter=='active')
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                     <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
                 </svg>
                 @endif
             </div>
             </a>
-            <a wire:click="addFilter('futures')" class="cursor-pointer border border-green-700 @if($filter=='futures') bg-green-800 text-white hover:bg-white  hover:text-green-800 @else text-green-700 hover:text-white hover:bg-green-800 @endif font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">
+            <a wire:click="addFilter('upcoming')" class="cursor-pointer border border-green-700 @if($filter=='upcoming') bg-green-800 text-white hover:bg-white  hover:text-green-800 @else text-green-700 hover:text-white hover:bg-green-800 @endif font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">
             <div class="flex flex-row min-w-9 justify-center items-center gap-2">
                 <p>Futuras</p>
-                @if($filter=='futures')
+                @if($filter=='upcoming')
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
                     <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
                 </svg>
@@ -51,7 +51,7 @@
         </div>
 
     </div>
-    <section class="grid grid-cols-4 gap-3 mt-10">
+    <section class="grid grid-cols-4 gap-8 mt-10">
         @for($i = 0; $i < 12; $i++)
             
         @foreach ($calls as $call)
@@ -65,7 +65,7 @@
                 </a>
                 <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">{{ $call->description }}</p>
                 <a href="#" class="inline-flex font-medium items-center text-blue-600 hover:underline">
-                    Editar Tarea
+                    Editar Convocatoria
                     <svg class="w-3 h-3 ms-2.5 rtl:rotate-[270deg]" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
                         <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11v4.833A1.166 1.166 0 0 1 13.833 17H2.167A1.167 1.167 0 0 1 1 15.833V4.167A1.166 1.166 0 0 1 2.167 3h4.618m4.447-2H17v5.768M9.111 8.889l7.778-7.778"/>
                     </svg>
