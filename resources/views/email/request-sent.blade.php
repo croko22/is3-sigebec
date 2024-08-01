@@ -210,9 +210,9 @@
 			font-family: sans-serif;"
                             class="paragraph">
                             <div class="mb-5 bold">
-                                Estimado/a [Nombre del Solicitante]
+                                Estimado/a {{$data["user"]->name}},
                             </div>
-                            Nos complace informarte que hemos recibido tu solicitud para el programa de becas. Nuestro
+                            Nos complace informarte que hemos recibido tu solicitud para {{$data["scholarshipCall"]->name}}. Nuestro
                             equipo revisará tu aplicación cuidadosamente.
                             Tu interés en formar parte de nuestro programa es muy valioso para nosotros, y nos
                             aseguraremos de proporcionarte una respuesta lo antes posible.

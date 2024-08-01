@@ -6,6 +6,7 @@ use App\Models\ScholarshipCall;
 use Livewire\Component; 
 use App\Models\User;
 use App\Models\Applicant;
+use App\Helpers\MailHelper;
 
 class Call extends Component
 {
@@ -56,6 +57,12 @@ class Call extends Component
             'scholarship_call_id' => $this->scholarshipCall->scholarship->id,
             'status' => 'pending',
             'start_date' => now(),
+        ]);
+        
+        MailHelper::enviarCorreo($user->email, 'Solicitud de beca', 'email.request-sent', [
+            'scholarshipCall' => $this->scholarshipCall , 
+            'applicant' => $applicant,
+            'user' => $user,
         ]);
 
         return redirect()->route('dashboard');
