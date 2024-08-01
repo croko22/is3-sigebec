@@ -8,10 +8,27 @@ use App\Models\Scholarship;
 use App\Http\Resources\BecaResource;
 use App\Http\Requests\Beca\IndexRequest as BecaIndexRequest;
 use Illuminate\Http\Request;
+use OpenApi\Attributes as OA;
 
+#[OA\Info(
+    version: '1.0.0',
+    title: 'Sigebec API',
+    description: 'API para el Sistema de Gestión de Becas',
+)]
+#[OA\PathItem(
+    path: "/api/becas"
+)]
 class BecaController extends Controller
 {
-    /**
+    /** 
+     * @OA\Get(
+     *    path="/api/becas",
+     *    operationId="getBecas",
+     *    tags={"Becas"},
+     *    summary="Listado de becas",
+     *    description="Obtiene un listado de becas",
+     *    @OA\Response(response=200, description="Listado de becas")
+     * )
      * Display a listing of the resource.
      */
     public function index(BecaIndexRequest $request)
