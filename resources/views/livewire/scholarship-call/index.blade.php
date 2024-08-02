@@ -2,8 +2,10 @@
     <h1 class="text-center">Convocatorias</h1>
     <section class="w-[65%]">
         <div class="flex flex-row justify-between w-full">
+            @role('admin')
             <livewire:modals.create-scholarship-call />
-            <x-search :query="$query" placeholder="Buscar Convocatoria..." wire:click='search' class="mx-0 m-0" style="margin:0 0 0 0"/>
+            @endrole
+            <x-search :query="$query" placeholder="Buscar Convocatoria..." wire:click='search' class="mx-0 m-0 @role('admin') w-full @endrole " style="margin:0 0 0 0"/>
         </div>
         <div class="my-4 grid grid-cols-3 gap-4">
             @foreach($calls as $call)
