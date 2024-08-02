@@ -19,6 +19,150 @@
                         "description": "Listado de becas"
                     }
                 }
+            },
+            "post": {
+                "tags": [
+                    "Becas"
+                ],
+                "summary": "Crear una nueva beca",
+                "description": "Crea una nueva beca",
+                "operationId": "storeBeca",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "nombre",
+                                    "descripcion"
+                                ],
+                                "properties": {
+                                    "nombre": {
+                                        "description": "User first name",
+                                        "type": "string"
+                                    },
+                                    "descripcion": {
+                                        "description": "User last name",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Beca creada"
+                    },
+                    "400": {
+                        "description": "Error en la solicitud"
+                    }
+                }
+            }
+        },
+        "/api/becas/{id}": {
+            "get": {
+                "tags": [
+                    "Becas"
+                ],
+                "summary": "Obtener una beca",
+                "description": "Obtiene una beca por ID",
+                "operationId": "getBeca",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Beca encontrada"
+                    },
+                    "404": {
+                        "description": "Beca no encontrada"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Becas"
+                ],
+                "summary": "Actualizar una beca",
+                "description": "Actualiza una beca por ID",
+                "operationId": "updateBeca",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/x-www-form-urlencoded": {
+                            "schema": {
+                                "required": [
+                                    "nombre",
+                                    "descripcion"
+                                ],
+                                "properties": {
+                                    "nombre": {
+                                        "description": "User first name",
+                                        "type": "string"
+                                    },
+                                    "descripcion": {
+                                        "description": "User last name",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Beca actualizada"
+                    },
+                    "404": {
+                        "description": "Beca no encontrada"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Becas"
+                ],
+                "summary": "Eliminar una beca",
+                "description": "Elimina una beca por ID",
+                "operationId": "deleteBeca",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Beca eliminada"
+                    },
+                    "404": {
+                        "description": "Beca no encontrada"
+                    }
+                }
             }
         }
     },
