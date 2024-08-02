@@ -8,8 +8,8 @@ use App\Models\Scholarship;
 use App\Http\Resources\BecaResource;
 use App\Http\Requests\Beca\IndexRequest as BecaIndexRequest;
 use App\Http\Requests\Beca\CreateRequest as BecaCreateRequest;
+use App\Http\Requests\Beca\UpdateRequest as BecaUpdateRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 use OpenApi\Attributes as OA;
 
 #[OA\Info(
@@ -52,37 +52,55 @@ class BecaController extends Controller
      */
     public function store(BecaCreateRequest $request)
     {
-        $validator = Validator::make($request->all(), BecaCreateRequest::rules(), BecaCreateRequest::messages());
-        if ($validator->fails()) {
-            return response()->json(['message' => $validator->errors()], 400);
-        }else{
-            $beca = Scholarship::create($request->all());
-            return BecaResource::make($beca);
-        }
+        $validated = $request->validated();
+        $beca = Scholarship::create([
+            'name' => $validated['nombre'],
+            'description' => $validated['descripcion']
+        ]);
+        return BecaResource::make($beca);
+
 
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Scholarship $scholarship)
+    public function show($id)
     {
-        //
+        $scholarship = Scholarship::find($id);
+        if(!$scholarship){
+            return response()->json(['message' => 'No se encontró la beca'], 404);
+        }
+        return BecaResource::make($scholarship);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Scholarship $scholarship)
+    public function update(BecaUpdateRequest $request,$id)
     {
-        //
+        $validated = $request->validated();
+        $scholarship = Scholarship::find($id);
+        if(!$scholarship){
+            return response()->json(['message' => 'No se encontró la beca'], 404);
+        }
+        $scholarship->update([
+            'name' => $validated['nombre']??$scholarship->name,
+            'description' => $validated['descripcion']??$scholarship->description
+        ]);
+        return BecaResource::make($scholarship);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Scholarship $scholarship)
+    public function destroy($id)
     {
-        //
+        $beca = Scholarship::find($id);
+        if(!$beca){
+            return response()->json(['message' => 'No se encontró la beca'], 404);
+        }
+        $beca->delete();
+        return response()->json(['message' => 'Beca eliminada correctamente'], 200);
     }
 }
