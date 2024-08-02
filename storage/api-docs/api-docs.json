@@ -1,0 +1,31 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Sigebec API",
+        "description": "API para el Sistema de Gestión de Becas",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/becas": {
+            "get": {
+                "tags": [
+                    "Becas"
+                ],
+                "summary": "Listado de becas",
+                "description": "Obtiene un listado de becas",
+                "operationId": "getBecas",
+                "responses": {
+                    "200": {
+                        "description": "Listado de becas"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Becas",
+            "description": "Becas"
+        }
+    ]
+}
