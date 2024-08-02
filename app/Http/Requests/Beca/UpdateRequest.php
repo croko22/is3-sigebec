@@ -4,14 +4,14 @@ namespace App\Http\Requests\Beca;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class IndexRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,8 +22,7 @@ class IndexRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nombre' => ['sometimes', 'string','nullable'],
-            'descripcion' => ['sometimes', 'string','nullable'],
+            //
         ];
     }
 }

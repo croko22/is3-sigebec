@@ -15,24 +15,24 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-    Route::get('/scholarship', ScholarshipCrud::class)->name('scholarship');
     Route::get('/scholarship/{scholarship}', ScholarshipShow::class)->name('scholarship.show');
     Route::get('/scholarshipcall', scholarshipcallIndex::class)->name('scholarshipcall');
     Route::get('/scholarshipcall/{scholarshipcall}', ScholarshipCall::class)->name('scholarship.call');
     Route::get('/scholarshipcall/{scholarshipcall}/edit', ScholarshipCallEdit::class)->name('scholarshipcall.edit');
-
+    
     Route::group(['middleware' => ['role:admin']], function () {
         Route::get('/applicant', ApplicantTable::class)->name('applicant');
     });
-
+    
     Route::group(['middleware' => ['role:teacher']], function () {
         Route::get('/attendance/{scholarship}', AttendanceIndex::class)->name('attendance');
     });
-
+    
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 Route::middleware(['guest'])->group(function () {
+    Route::get('/scholarship', ScholarshipCrud::class)->name('scholarship');
     Route::view('/', 'welcome')->name('home');
 
     Route::view('/login', 'auth.login')->name('login');
