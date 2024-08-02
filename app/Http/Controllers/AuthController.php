@@ -11,9 +11,37 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use OpenApi\Attributes as OA;
 
+#[OA\PathItem(
+    path: "/api/auth"
+)]
 class AuthController extends Controller
 {
+    #[OA\Post(
+        path: "/api/auth/login",
+        operationId: "login",
+        tags: ["Auth"],
+        summary: "User login",
+        description: "Logs in a user",
+        requestBody: new OA\RequestBody(
+            required: true,
+            content: new OA\MediaType(
+                mediaType: "application/x-www-form-urlencoded",
+                schema: new OA\Schema(
+                    required: ["email", "password"],
+                    properties: [
+                        new OA\Property(property: "email", type: "string"),
+                        new OA\Property(property: "password", type: "string"),
+                    ]
+                )
+            )
+        ),
+        responses: [
+            new OA\Response(response: 200, description: "Successful login"),
+            new OA\Response(response: 401, description: "Invalid credentials"),
+        ]
+    )]
     public function login(LoginRequest $request)
     {
         $data = $request->validated();
@@ -27,6 +55,16 @@ class AuthController extends Controller
         return back()->with('error', 'Invalid credentials');
     }
 
+    #[OA\Post(
+        path: "/api/auth/logout",
+        operationId: "logout",
+        tags: ["Auth"],
+        summary: "User logout",
+        description: "Logs out a user",
+        responses: [
+            new OA\Response(response: 200, description: "Successful logout"),
+        ]
+    )]
     public function logout(Request $request): RedirectResponse
     {
         Auth::logout();
@@ -37,6 +75,25 @@ class AuthController extends Controller
         return redirect()->route('login')->with('success', 'You have been logged out!');
     }
 
+    #[OA\Post(
+        path: "/api/auth/forgot-password",
+        operationId: "forgotPassword",
+        tags: ["Auth"],
+        summary: "Forgot password",
+        description: "Sends a password reset link",
+        requestBody: new OA\RequestBody(
+            required: true,
+            content: new OA\JsonContent(
+                required: ["email"],
+                properties: [
+                    new OA\Property(property: "email", type: "string", format: "email"),
+                ]
+            )
+        ),
+        responses: [
+            new OA\Response(response: 200, description: "Password reset link sent"),
+        ]
+    )]
     public function forgotPassword(Request $request)
     {
         $request->validate(['email' => 'required|email']);
